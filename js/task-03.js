@@ -1,3 +1,5 @@
+"use strict";
+
 const images = [
   {
     url: "https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
@@ -13,18 +15,15 @@ const images = [
   },
 ];
 
-// const imageEl = document.querySelector('images');
-// console.log(imageEl);
-// console.log(imageEl.url);
+const imagesEl = images
+  .map((image) => {
+    return `<li><img class= image src= ${image.url} alt='${image.alt}' width= 340px></img>
+  </li>`;
+  })
+  .join("");
 
-const galleryItem = ({ url, alt }) =>
-  `<li><img src="${url}" alt="${alt}" width = 200 height = 150></li>`;
-const galleryMarkup = images.reduce((acc, item) => acc + galleryItem(item), "");
-const galleryList = document.querySelector("#gallery");
-galleryList.insertAdjacentHTML("afterbegin", galleryMarkup);
-galleryList.setAttribute(
-  "style",
-  "list-style-type:none; display: flex; justify-content: space-between;"
-);
-
-console.log(galleryList);
+const galleryEl = document.querySelector(".gallery");
+galleryEl.style.display = "flex";
+galleryEl.style.flexDirection = "column";
+galleryEl.style.gap = "10px";
+galleryEl.insertAdjacentHTML("afterbegin", imagesEl);
